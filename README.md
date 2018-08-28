@@ -2,7 +2,7 @@
 
 This is a port of [igrigorik/ga-beacon](https://github.com/igrigorik/ga-beacon) to ASP.NET Core 2.1.
 
-The beacon app serves either a one-pixel transparent GIF image or a visible icon (once their respective images are created). The `<img />` tag with the pixel or icon can be placed to pages that cannot be tracked with ordinary Google Analytics JavaScript code. The beacon service will log hits to such pages instead.
+The beacon app serves either a one-pixel transparent GIF image or a visible icon ([once their respective images are created](https://github.com/Kentico/google-analytics-beacon-net/issues/2)). The `<img />` tag with the pixel or icon can be placed to pages that cannot be tracked with ordinary Google Analytics JavaScript code. The beacon service will log hits to such pages instead.
 
 The beacon service will check for the existence of the `cid` cookie (used by Google Analytics) and will create one eventually. 
 
@@ -22,6 +22,6 @@ The above URLs can also be suffixed with the same switches as the [original impl
 * `flat`
 * `flat-gif`
 
-**Note:** Currently, only the `pixel` switch is supported. Other switches require their respective return images to be created for this repository. Feel free to contribute with your images!
+**Note:** Currently, only the `pixel` switch is supported. Other switches require their respective return images [to be created for this repository](https://github.com/Kentico/google-analytics-beacon-net/issues/2). Feel free to contribute with your images!
 
 ![Analytics](https://kentico-ga-beacon.azurewebsites.net/api/UA-69014260-4/Kentico/google-analytics-beacon-net?pixel)
