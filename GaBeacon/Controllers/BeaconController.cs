@@ -183,8 +183,6 @@ namespace GaBeacon.Controllers
             {
                 _telemetry.TrackTrace($"GA hit was logged. Tracking ID: {trackingId}, client ID: {clientId}, IP address: {ipAddress}, page path: {pagePath}.", SeverityLevel.Information);
             }
-
-            return;
         }
 
         private string GenerateUuid()
@@ -200,13 +198,12 @@ namespace GaBeacon.Controllers
             long result = rand.Next((int)(min >> 32), (int)(max >> 32));
             result = (result << 32);
             result = result | (long)rand.Next((int)min, (int)max);
-
             return result;
         }
 
         private bool IsQueryStringParamPresent(string queryStringParam) => Request
             .Query
             .Where(query => query.Key.Equals(queryStringParam, StringComparison.OrdinalIgnoreCase))
-            .Count() > 0;
+            .Any();
     }
 }
