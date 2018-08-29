@@ -21,7 +21,7 @@ namespace GaBeacon.Controllers
         private const string PAGE_PATH = "dp";
         private const string IP_ADDRESS = "uip";
         private const string USE_REFERER = "useReferer";
-        private const string COOKIE_PATH = "/Kentico";
+        private const string COOKIE_PATH = "/";
 
         private Dictionary<string, string> _outputOptions = new Dictionary<string, string>
         {
