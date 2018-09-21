@@ -102,7 +102,7 @@ namespace GaBeacon.Controllers
             {
                 try
                 {
-                    await LogHit(trackingId, clientId, HitType.PageView, pathToLog, ipAddress);
+                    await LogHit(trackingId, clientId, HitType.PageView, pathToLog, ipAddress, HttpContext.Request.Headers["User-Agent"].FirstOrDefault());
                 }
                 catch (Exception ex)
                 {
@@ -117,6 +117,16 @@ namespace GaBeacon.Controllers
                 {
                     Path = COOKIE_PATH
                 });
+
+            Response.Headers.Add("Cache-Control", new Microsoft.Extensions.Primitives.StringValues(new[]
+                {
+                    "no-cache",
+                    "no-store",
+                    "must-revalidate",
+                    "private"
+                }));
+
+            Response.Headers.Add("Expires", DateTime.UtcNow.ToString("r"));
 
             string imagePath = null;
 
@@ -135,7 +145,7 @@ namespace GaBeacon.Controllers
             return File(imagePath, imagePath.EndsWith(".gif") ? "image/gif" : "image/svg+xml");
         }
 
-        private async Task LogHit(string trackingId, string clientId, HitType hitType, string pagePath, string ipAddress)
+        private async Task LogHit(string trackingId, string clientId, HitType hitType, string pagePath, string ipAddress, string userAgent)
         {
             if (string.IsNullOrEmpty(trackingId))
             {
@@ -159,7 +169,7 @@ namespace GaBeacon.Controllers
 
             var httpClient = HttpClientFactory.Create();
             var request = new HttpRequestMessage(HttpMethod.Post, GA_URI);
-            request.Headers.Add("User-Agent", "csharp");
+            request.Headers.Add("User-Agent", userAgent);
 
             var payload = new Dictionary<string, string>
             {
