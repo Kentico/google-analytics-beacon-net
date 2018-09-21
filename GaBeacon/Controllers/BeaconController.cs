@@ -118,16 +118,7 @@ namespace GaBeacon.Controllers
                     Path = COOKIE_PATH
                 });
 
-            Response.Headers.Add("Cache-Control", new Microsoft.Extensions.Primitives.StringValues(new[]
-                {
-                    "no-cache",
-                    "no-store",
-                    "must-revalidate",
-                    "private"
-                }));
-
             Response.Headers.Add("Expires", DateTime.UtcNow.ToString("r"));
-
             string imagePath = null;
 
             foreach (var option in _outputOptions)
