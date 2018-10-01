@@ -7,6 +7,7 @@ using Microsoft.ApplicationInsights;
 using Microsoft.ApplicationInsights.DataContracts;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 
 namespace GaBeacon.Controllers
 {
@@ -14,6 +15,9 @@ namespace GaBeacon.Controllers
     [ApiController]
     public class BeaconController : ControllerBase
     {
+        private IConfiguration _configuration;
+
+        private readonly string COOKIE_PATH = "/";
         private const string GA_URI = "http://www.google-analytics.com/collect";
         private const string TRACKING_ID = "tid";
         private const string CLIENT_ID = "cid";
@@ -21,7 +25,7 @@ namespace GaBeacon.Controllers
         private const string PAGE_PATH = "dp";
         private const string IP_ADDRESS = "uip";
         private const string USE_REFERER = "useReferer";
-        private const string COOKIE_PATH = "/";
+
 
         private Dictionary<string, string> _outputOptions = new Dictionary<string, string>
         {
@@ -35,9 +39,13 @@ namespace GaBeacon.Controllers
         private readonly IHttpContextAccessor _httpContextAccessor;
         private TelemetryClient _telemetry = new TelemetryClient();
 
-        public BeaconController(IHttpContextAccessor httpContextAccessor)
+        public BeaconController(IHttpContextAccessor httpContextAccessor, IConfiguration configuration)
         {
             _httpContextAccessor = httpContextAccessor ?? throw new ArgumentNullException(nameof(httpContextAccessor));
+
+            _configuration = configuration;
+
+            COOKIE_PATH = _configuration.GetValue<string>("COOKIE_PATH") ?? "/";
         }
 
         // GET api/UA-00000-0
