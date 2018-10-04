@@ -7,6 +7,7 @@ using Microsoft.ApplicationInsights;
 using Microsoft.ApplicationInsights.DataContracts;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 
 namespace GaBeacon.Controllers
 {
@@ -21,7 +22,9 @@ namespace GaBeacon.Controllers
         private const string PAGE_PATH = "dp";
         private const string IP_ADDRESS = "uip";
         private const string USE_REFERER = "useReferer";
-        private const string COOKIE_PATH = "/";
+
+        private IConfiguration _configuration;
+        private readonly string _cookiePath = "/";
 
         private Dictionary<string, string> _outputOptions = new Dictionary<string, string>
         {
@@ -35,9 +38,11 @@ namespace GaBeacon.Controllers
         private readonly IHttpContextAccessor _httpContextAccessor;
         private TelemetryClient _telemetry = new TelemetryClient();
 
-        public BeaconController(IHttpContextAccessor httpContextAccessor)
+        public BeaconController(IHttpContextAccessor httpContextAccessor, IConfiguration configuration)
         {
             _httpContextAccessor = httpContextAccessor ?? throw new ArgumentNullException(nameof(httpContextAccessor));
+            _configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
+            _cookiePath = _configuration.GetValue<string>("CookiePath") ?? "/";
         }
 
         // GET api/UA-00000-0
@@ -115,7 +120,7 @@ namespace GaBeacon.Controllers
                 clientId,
                 new CookieOptions()
                 {
-                    Path = COOKIE_PATH
+                    Path = _cookiePath
                 });
 
             Response.Headers.Add("Expires", DateTime.UtcNow.ToString("r"));
