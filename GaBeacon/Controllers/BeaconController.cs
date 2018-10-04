@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 using Microsoft.ApplicationInsights;
 using Microsoft.ApplicationInsights.DataContracts;
@@ -193,7 +194,9 @@ namespace GaBeacon.Controllers
 
         private string GenerateUuid()
         {
-            var random = LongRandom(1000000000, 9999999999, new Random());
+            var randomBytes = new byte[10];
+            RandomNumberGenerator.Fill(randomBytes);
+            var random = BitConverter.ToUInt32(randomBytes);
             var unixTimestamp = (int)DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalSeconds;
 
             return $"GA.1-2.{random}.{unixTimestamp}";
