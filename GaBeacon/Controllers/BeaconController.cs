@@ -191,9 +191,7 @@ namespace GaBeacon.Controllers
         {
             var randomBytes = new byte[10];
             RandomNumberGenerator.Fill(randomBytes);
-
             var random = BitConverter.ToUInt32(randomBytes);
-
             var unixTimestamp = (int)DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalSeconds;
 
             return $"GA.1-2.{random}.{unixTimestamp}";
