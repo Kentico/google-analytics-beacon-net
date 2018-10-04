@@ -15,9 +15,6 @@ namespace GaBeacon.Controllers
     [ApiController]
     public class BeaconController : ControllerBase
     {
-        private IConfiguration _configuration;
-
-        private readonly string COOKIE_PATH = "/";
         private const string GA_URI = "http://www.google-analytics.com/collect";
         private const string TRACKING_ID = "tid";
         private const string CLIENT_ID = "cid";
@@ -26,6 +23,8 @@ namespace GaBeacon.Controllers
         private const string IP_ADDRESS = "uip";
         private const string USE_REFERER = "useReferer";
 
+        private IConfiguration _configuration;
+        private readonly string _cookiePath = "/";
 
         private Dictionary<string, string> _outputOptions = new Dictionary<string, string>
         {
@@ -42,10 +41,8 @@ namespace GaBeacon.Controllers
         public BeaconController(IHttpContextAccessor httpContextAccessor, IConfiguration configuration)
         {
             _httpContextAccessor = httpContextAccessor ?? throw new ArgumentNullException(nameof(httpContextAccessor));
-
-            _configuration = configuration;
-
-            COOKIE_PATH = _configuration.GetValue<string>("COOKIE_PATH") ?? "/";
+            _configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
+            _cookiePath = _configuration.GetValue<string>("CookiePath") ?? "/";
         }
 
         // GET api/UA-00000-0
@@ -123,7 +120,7 @@ namespace GaBeacon.Controllers
                 clientId,
                 new CookieOptions()
                 {
-                    Path = COOKIE_PATH
+                    Path = _cookiePath
                 });
 
             Response.Headers.Add("Expires", DateTime.UtcNow.ToString("r"));
