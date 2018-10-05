@@ -17,6 +17,18 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Update="wwwroot\badge-flat.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\badge-flat.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\badge.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\badge.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Update="wwwroot\test.gif">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
