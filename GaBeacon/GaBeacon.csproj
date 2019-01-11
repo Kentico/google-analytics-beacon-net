@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
     <ApplicationInsightsResourceId>/subscriptions/43020930-65a0-44b1-acf7-e8740a3c1cd4/resourcegroups/GaBeacon/providers/microsoft.insights/components/GaBeacon</ApplicationInsightsResourceId>
     <ApplicationInsightsAnnotationResourceId>/subscriptions/43020930-65a0-44b1-acf7-e8740a3c1cd4/resourcegroups/GaBeacon/providers/microsoft.insights/components/GaBeacon</ApplicationInsightsAnnotationResourceId>
     <UserSecretsId>426cbd99-539d-44dd-a278-3eccd5013094</UserSecretsId>
@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.1.1" />
+    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.5.1" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
 
