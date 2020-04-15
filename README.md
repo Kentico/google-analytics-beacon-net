@@ -1,4 +1,4 @@
-# Google Analytics Beacon Service written in ASP.NET Core
+# Google Analytics Beacon Service for ASP.NET Core
 
 This is a port of [igrigorik/ga-beacon](https://github.com/igrigorik/ga-beacon) to ASP.NET Core 2.1.
 
