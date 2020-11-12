@@ -1,3 +1,5 @@
+> ⚠️ This project has been archived since it can no longer serve to reliably track GitHub traffic (which was the primary reason it was created for). Please use [GitHub traffic analytics](https://github.com/blog/1672-introducing-github-traffic-analytics) instead.
+
 # Google Analytics Beacon Service for ASP.NET Core
 
 This is a port of [igrigorik/ga-beacon](https://github.com/igrigorik/ga-beacon) to ASP.NET Core 2.1.
